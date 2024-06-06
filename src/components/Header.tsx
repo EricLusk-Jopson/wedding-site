@@ -13,7 +13,13 @@ const Header = () => {
             <NavLink to="/venue">Venue</NavLink>
           </li>
           <li>
+            <NavLink to="/gallery">Gallery</NavLink>
+          </li>
+          <li>
             <NavLink to="/rsvp">RSVP</NavLink>
+          </li>
+          <li>
+            <NavLink to="/registry">Registry</NavLink>
           </li>
         </ul>
       </nav>
