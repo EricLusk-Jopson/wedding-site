@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
-import DownloadIcon from "@mui/icons-material/Download";
 import { Box, IconButton } from "@mui/material";
 
 interface ImagePreviewModalProps {
@@ -45,13 +44,6 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
         <ImagePreviewModalImage src={imageSrc} alt="Enlarged" />
       </ImagePreviewModalContent>
       <Box sx={{ position: "absolute", top: 10, right: 10, color: "white" }}>
-        <IconButton
-          aria-label="Close popup modal"
-          onClick={onClose}
-          sx={{ color: "#fff" }}
-        >
-          <DownloadIcon />
-        </IconButton>
         <IconButton
           aria-label="Close popup modal"
           onClick={onClose}
