@@ -1,0 +1,112 @@
+/* RSVP.module.css */
+
+.container {
+  display: flex;
+  height: calc(100vh - 35px);
+  justify-content: center;
+  align-items: center;
+  background: #fafafb; /* Greyish white background */
+}
+
+.card {
+  background: transparent; /* Transparent form background */
+  padding: 2rem;
+  border-radius: 8px;
+  border: 3px solid #888; /* Dark, heavy border for contrast */
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #222; /* Darker gray for title text */
+  text-shadow: 1px 1px 0px #fff, -1px -1px 0px #fff; /* Subtle shadow for a hand-drawn effect */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input,
+textarea {
+  padding: 0.8rem;
+  border: 2px solid #888; /* Heavy contrast border for input fields */
+  border-radius: 4px;
+  font-size: 1rem;
+  background: transparent; /* Transparent background for inputs */
+  font-family: "Montserrat", sans-serif;
+  box-shadow: none; /* No inner shadow */
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  color: #333; /* Dark gray for label text */
+}
+
+button {
+  padding: 0.8rem;
+  background: #eee;
+  color: #222;
+  border: 3px solid #888; /* Heavy border on button as well */
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-family: "Montserrat", sans-serif;
+  box-shadow: none; /* No shadow on button */
+}
+
+button:hover {
+  background: #bbb;
+  border-color: #222;
+}
+
+*:disabled,
+button:disabled {
+  background: #eee;
+  border-color: #555;
+}
+
+.radio {
+  display: flex;
+  gap: 1rem;
+}
+
+input[type="radio"] {
+  accent-color: #f97d7d;
+  transform: scale(1.1);
+  border: 2px solid #333; /* Heavy border for radio buttons */
+}
+
+.error {
+  color: #d9534f; /* Bright red for error text */
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+}

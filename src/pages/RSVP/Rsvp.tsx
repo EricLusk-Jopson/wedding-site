@@ -1,12 +1,12 @@
-// src/RSVP.tsx
 import React, { useState, useEffect, FormEvent } from "react";
 import { useParams } from "react-router-dom";
 import { Party } from "../../types/Party";
 import { supabase } from "../../supabase/supabaseClient";
+import styles from "./Rsvp.module.css";
 
 const RSVP: React.FC = () => {
   const { token } = useParams();
-  const [party, setParty] = useState<Party | null>(null);
+  const [party, setParty] = useState<Party>({} as Party);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -15,7 +15,7 @@ const RSVP: React.FC = () => {
       fetchParty();
     } else {
       setLoading(false);
-      setError("No token provided");
+      setError("Please check your inbox for an RSVP link.");
     }
   }, [token]);
 
@@ -26,22 +26,35 @@ const RSVP: React.FC = () => {
       .eq("token", token)
       .single();
     if (error || !data) {
-      setError("Invalid token. Please check your email for the correct link.");
+      setError(
+        "We could not verify your RSVP link. Please check your inbox for an RSVP link."
+      );
     } else {
       setParty(data as Party);
     }
     setLoading(false);
   };
 
+  const handleInputChange = (
+    field: keyof Party,
+    value: string | number | boolean
+  ) => {
+    setParty((prevParty) => {
+      return { ...prevParty, [field]: value };
+    });
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!party) return;
+
     const { error } = await supabase
       .from("parties")
       .update({
-        name: party?.name,
-        size: party?.size,
-        notes: party?.notes,
-        confirmed: party?.confirmed,
+        name: party.name,
+        size: party.size,
+        notes: party.notes,
+        confirmed: party.confirmed,
       })
       .eq("token", token);
 
@@ -49,62 +62,63 @@ const RSVP: React.FC = () => {
       console.error("Error updating party:", error);
     } else {
       // Redirect to thank you page
-      window.location.href = party?.confirmed ? "/thank-you" : "/sorry";
+      window.location.href = party.confirmed ? "/thank-you" : "/sorry";
     }
   };
 
-  if (loading) return <div>Loading...</div>;
-
-  if (error) {
-    return (
-      <div>
-        <h2>{error}</h2>
-        <p>Please check your email for the correct RSVP link.</p>
-      </div>
-    );
-  }
-
-  if (!party) return null;
-
   return (
-    <div>
-      <h2>RSVP for {party.name}</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Party Name"
-          value={party.name}
-          onChange={(e) => setParty({ ...party, name: e.target.value })}
-        />
-        <input
-          type="number"
-          placeholder="Party Size"
-          value={party.size}
-          onChange={(e) => setParty({ ...party, size: Number(e.target.value) })}
-        />
-        <textarea
-          placeholder="Notes"
-          value={party.notes || ""}
-          onChange={(e) => setParty({ ...party, notes: e.target.value })}
-        />
-        <label>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <h1 className={styles.title}>Join Us</h1>
+        {error && <p className={styles.error}>{error}</p>}
+        <form onSubmit={handleSubmit}>
           <input
-            type="radio"
-            checked={party.confirmed === true}
-            onChange={() => setParty({ ...party, confirmed: true })}
+            type="text"
+            placeholder="Party Name"
+            value={party?.name}
+            onChange={(e) => handleInputChange("name", e.target.value)}
+            disabled={loading || !!error}
           />
-          Confirm
-        </label>
-        <label>
           <input
-            type="radio"
-            checked={party.confirmed === false}
-            onChange={() => setParty({ ...party, confirmed: false })}
+            type="number"
+            placeholder="Party Size"
+            value={party?.size}
+            onChange={(e) => handleInputChange("size", Number(e.target.value))}
+            disabled={loading || !!error}
           />
-          Decline
-        </label>
-        <button type="submit">Submit RSVP</button>
-      </form>
+          <textarea
+            placeholder="Notes"
+            value={party?.notes}
+            onChange={(e) => handleInputChange("notes", e.target.value)}
+            disabled={loading || !!error}
+          />
+          <div className={styles.radio}>
+            <label>
+              <input
+                type="radio"
+                name="confirmation"
+                checked={party?.confirmed === true}
+                onChange={() => handleInputChange("confirmed", true)}
+                disabled={loading || !!error}
+              />
+              Confirm
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="confirmation"
+                checked={party?.confirmed === false}
+                onChange={() => handleInputChange("confirmed", false)}
+                disabled={loading || !!error}
+              />
+              Decline
+            </label>
+          </div>
+          <button type="submit" disabled={loading || !!error}>
+            Submit RSVP
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
