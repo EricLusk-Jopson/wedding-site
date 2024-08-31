@@ -1,5 +1,5 @@
 import styles from "./Rsvp.module.css";
-import venue from "../../assets/Images/small/pax1.jpeg";
+import venue from "../../assets/Images/pax1.jpeg";
 import RsvpForm from "../../components/RsvpForm/RsvpForm";
 
 const RSVP: React.FC = () => {
