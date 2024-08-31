@@ -2,6 +2,7 @@
   max-width: 500px;
   width: 100%;
   z-index: 20;
+  margin: 0 auto;
 }
 
 .error {
@@ -16,6 +17,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  margin: 4rem 1rem;
 }
 
 input,
@@ -83,6 +85,10 @@ button:disabled {
   background: #000;
   border-color: #333;
   cursor: not-allowed;
+}
+
+button:disabled:hover {
+  color: #aaa;
 }
 
 .radio {
