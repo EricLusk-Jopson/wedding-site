@@ -1,112 +1,220 @@
-/* RSVP.module.css */
-
-.container {
+.rsvpMain {
+  z-index: -1;
+  background-color: #000;
+  padding: 0;
   display: flex;
-  height: calc(100vh - 35px);
-  justify-content: center;
-  align-items: center;
-  background: #fafafb; /* Greyish white background */
+  flex-direction: column;
+  gap: 30px;
 }
 
-.card {
-  background: transparent; /* Transparent form background */
-  padding: 2rem;
-  border-radius: 8px;
-  border: 3px solid #888; /* Dark, heavy border for contrast */
-  max-width: 500px;
-  width: 100%;
-  position: relative;
+.rsvpMain * {
+  background-color: transparent;
   z-index: 1;
 }
 
-.title {
-  font-family: "Playfair Display", serif;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #222; /* Darker gray for title text */
-  text-shadow: 1px 1px 0px #fff, -1px -1px 0px #fff; /* Subtle shadow for a hand-drawn effect */
-}
-
-form {
+.heroContainer {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-}
-
-input,
-textarea {
-  padding: 0.8rem;
-  border: 2px solid #888; /* Heavy contrast border for input fields */
-  border-radius: 4px;
-  font-size: 1rem;
-  background: transparent; /* Transparent background for inputs */
-  font-family: "Montserrat", sans-serif;
-  box-shadow: none; /* No inner shadow */
-}
-
-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-label {
-  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: "Montserrat", sans-serif;
-  color: #333; /* Dark gray for label text */
+  gap: 10px;
+  width: 100%;
+  z-index: 2;
 }
 
-button {
-  padding: 0.8rem;
-  background: #eee;
-  color: #222;
-  border: 3px solid #888; /* Heavy border on button as well */
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s;
-  font-family: "Montserrat", sans-serif;
-  box-shadow: none; /* No shadow on button */
+.imageContainer {
+  position: relative;
 }
 
-button:hover {
-  background: #bbb;
-  border-color: #222;
+.imageContainer img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
-*:disabled,
-button:disabled {
-  background: #eee;
-  border-color: #555;
+.imageContainer .centeredLink {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-decoration: none;
+  color: #fff;
+  border: #fff solid 4px;
+  padding: 1rem 3rem;
+  background-color: rgba(75, 23, 4, 0.3);
 }
 
-.radio {
+.contentContainer {
+  box-sizing: border-box;
+  height: fit-content;
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  color: hsl(0, 0%, 100%);
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 40px 25px 25px 25px;
 }
 
-input[type="radio"] {
-  accent-color: #f97d7d;
-  transform: scale(1.1);
-  border: 2px solid #333; /* Heavy border for radio buttons */
-}
-
-.error {
-  color: #d9534f; /* Bright red for error text */
-  font-weight: bold;
-  margin-bottom: 1rem;
+.titleContainer {
   text-align: center;
+  font-size: medium;
+  color: #bbb;
 }
 
-@media (max-width: 500px) {
-  .card {
-    padding: 1.5rem;
+.titleContainer h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #ddd;
+}
+
+.titleContainer h3 {
+  margin-top: 1rem;
+  font-size: medium;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  justify-content: space-evenly;
+  width: 100%;
+  background-color: #000;
+  color: #bbb;
+  margin-bottom: 50px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  justify-content: baseline;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 0rem 3rem;
+}
+
+.details h2 {
+  text-decoration: underline;
+  color: #ddd;
+}
+
+.title {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.9rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Desktop layout adjustments */
+@media (min-width: 768px) {
+  .heroContainer {
+    flex-direction: row;
+    position: relative;
+    gap: 0;
+    z-index: 2;
   }
 
-  .title {
-    font-size: 1.5rem;
+  .heroContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../../assets/Images/small/pax1.jpeg");
+    background-size: 80% auto; /* Stretch the image horizontally */
+    background-position: 250% -30%; /* Translate the image horizontally to the left */
+    background-repeat: repeat; /* Ensure the image doesn't repeat */
+    filter: blur(2px); /* Apply blur effect */
+    z-index: 1; /* Ensure the background stays behind the content */
+  }
+
+  .imageContainer img {
+    width: auto;
+    height: calc(100vh - 35px);
+    vertical-align: bottom;
+    max-height: 100vh;
+  }
+
+  .imageContainer .centeredLink {
+    font-size: large;
+  }
+
+  .contentContainer {
+    flex-grow: 1;
+    height: calc(100vh - 35px);
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+  }
+
+  .titleContainer {
+    text-align: center;
+    font-size: medium;
+    border: #fff solid 2px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    padding: 1.5rem 2rem;
+    margin: 0px 50px;
+  }
+
+  .titleContainer h2 {
+    color: #fff;
+    font-size: 2.5rem;
+  }
+
+  .titleContainer h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+  }
+
+  .detailsContainer {
+    flex-direction: row;
+    gap: 60px;
+    justify-content: space-evenly;
+    width: 90vw;
+    background-color: #000;
+    color: #bbb;
+    margin: 50px 50px 50px 30px;
+  }
+
+  .villainContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 6rem;
+    padding-top: 4rem;
+  }
+
+  .villainContainer .imageContainer {
+    flex-grow: 1; /* Allow the image container to grow and shrink */
+    flex-basis: 0; /* Set initial basis to 0 to let flex-grow decide the size */
+    min-width: 0; /* Prevent image overflow */
+    overflow: hidden; /* Hide any overflow */
+    display: flex; /* Align image properly */
+    justify-content: center; /* Center the image */
+    padding: 0 2rem;
+  }
+
+  .villainContainer .imageContainer img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Cover the container without distortion */
+    max-width: 100%;
+  }
+
+  .formContainer {
+    flex-shrink: 0; /* Prevent the form container from shrinking */
+    flex-basis: 500px; /* The form container takes up at least 300px */
+    max-width: 50%; /* Allow the form container to take up to 50% of the width */
+    padding: 1rem;
+    margin: 2rem 8rem;
+    box-sizing: border-box; /* Include padding in width calculation */
   }
 }

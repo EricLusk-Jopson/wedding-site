@@ -81,7 +81,7 @@ const Gallery = () => {
   };
 
   return (
-    <>
+    <main style={{ backgroundColor: "#efefef" }}>
       <GalleryContainer>
         {imagesRef.current.map((image) => (
           <ImageWrapper>
@@ -96,7 +96,7 @@ const Gallery = () => {
           onClose={closeModal}
         />
       )}
-    </>
+    </main>
   );
 };
 
