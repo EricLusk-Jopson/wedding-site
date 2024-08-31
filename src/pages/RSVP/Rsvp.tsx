@@ -1,16 +1,24 @@
 import styles from "./Rsvp.module.css";
 import venue from "../../assets/Images/pax1.jpeg";
+import coupe from "../../assets/Images/pax2.webp";
 import RsvpForm from "../../components/RsvpForm/RsvpForm";
 
 const RSVP: React.FC = () => {
+  const scrollToSection = () => {
+    const section = document.getElementById("rsvp-section");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <main className={styles.rsvpMain}>
       <section className={styles.heroContainer}>
         <div className={styles.imageContainer}>
           <img src={venue} alt="Description" />
-          <a href="#rsvp-section" className={styles.centeredLink}>
+          <button className={styles.centeredLink} onClick={scrollToSection}>
             <h1 className={styles.contentTitle}>RSVP</h1>
-          </a>
+          </button>
         </div>
         <div className={styles.contentContainer}>
           <section className={styles.titleContainer}>
@@ -46,12 +54,11 @@ const RSVP: React.FC = () => {
         </section>
       </section>
       <section id="rsvp-section" className={styles.villainContainer}>
-        <div>
-          <h2 className={styles.title}>
-            Please RSVP before September 14<sup>th</sup>
-          </h2>
-          <RsvpForm />
-        </div>
+        <img src={coupe}></img>
+        <h2 className={styles.title}>
+          Please RSVP before September 14<sup>th</sup>
+        </h2>
+        <RsvpForm />
       </section>
     </main>
   );
