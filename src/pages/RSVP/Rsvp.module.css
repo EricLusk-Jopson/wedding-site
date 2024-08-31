@@ -125,7 +125,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("../../assets/Images/small/pax1.jpeg");
+    background-image: url("../../assets/Images/pax1.jpeg");
     background-size: 80% auto; /* Stretch the image horizontally */
     background-position: 250% -30%; /* Translate the image horizontally to the left */
     background-repeat: repeat; /* Ensure the image doesn't repeat */
