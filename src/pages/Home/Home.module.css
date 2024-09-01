@@ -35,12 +35,20 @@
 .textContentContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 3rem;
   padding: 2rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .textContentContainer * {
   margin: 1rem 0;
+}
+
+.textContentContainer p {
+  color: #bbb;
+  line-height: 1.5rem;
 }
 
 @media (min-width: 700px) {
