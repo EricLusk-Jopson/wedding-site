@@ -2,7 +2,7 @@
   max-width: 500px;
   width: 100%;
   z-index: 20;
-  margin: 0 auto;
+  margin: 8rem auto 2rem;
 }
 
 .error {

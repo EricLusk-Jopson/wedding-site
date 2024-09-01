@@ -53,7 +53,8 @@ const Admin: React.FC = () => {
     const templateParams = {
       to_email: partyEmail,
       to_name: name,
-      message: `Your RSVP token is: http://localhost:3000/rsvp/${token}. Please use it to confirm your attendance.`,
+      reply_to: "eluskjopson@gmail.com",
+      message: `Your RSVP token is: https://ericlusk-jopson.github.io/wedding-site/#/rsvp/${token}. Please use it to confirm your attendance.`,
     };
 
     emailjs

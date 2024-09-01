@@ -38,9 +38,11 @@ const RSVP: React.FC = () => {
         );
       default:
         return (
-          <h2 className={styles.title}>
-            Please RSVP before September 14<sup>th</sup>
-          </h2>
+          <div className={styles.message}>
+            <h2 className={styles.title}>
+              Please RSVP before September 14<sup>th</sup>
+            </h2>
+          </div>
         );
     }
   };
@@ -89,7 +91,7 @@ const RSVP: React.FC = () => {
       </section>
       <section id="rsvp-section" className={styles.villainContainer}>
         <img src={coupe}></img>
-        <h2>{getMessageFromToken()}</h2>
+        {getMessageFromToken()}
         {token !== "thank-you" && token !== "sorry" && <RsvpForm />}
       </section>
     </main>
