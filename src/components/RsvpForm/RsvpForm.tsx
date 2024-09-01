@@ -1,12 +1,13 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { supabase } from "../../supabase/supabaseClient";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Party } from "../../types/Party";
 import styles from "./RsvpForm.module.css";
 import classNames from "classnames";
 
 const RsvpForm = () => {
   const { token } = useParams();
+  const navigate = useNavigate();
   const [party, setParty] = useState<Party>({} as Party);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -63,7 +64,11 @@ const RsvpForm = () => {
       console.error("Error updating party:", error);
     } else {
       // Redirect to thank you page
-      window.location.href = party.confirmed ? "/thank-you" : "/sorry";
+      if (party.confirmed) {
+        navigate("/rsvp/thank-you");
+      } else {
+        navigate("/rsvp/sorry");
+      }
     }
   };
 
@@ -81,7 +86,9 @@ const RsvpForm = () => {
 
   return (
     <div className={styles.card}>
-      {error && <p className={styles.error}>{error}</p>}
+      {!(token === "thank-you") && !(token === "sorry") && error && (
+        <p className={styles.error}>{error}</p>
+      )}
       <form
         onSubmit={handleSubmit}
         className={classNames(styles.form, {

@@ -1,35 +1,50 @@
+/* Header.css */
+
 .header {
-  background-color: black;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: #000; /* Background color of the header */
+  padding: 10px 20px; /* Padding around the header content */
+  position: fixed; /* Fixes the header at the top of the page */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of the viewport */
+  height: 40px; /* Fixed height of the header */
+  display: flex; /* Flexbox to align content */
+  align-items: center; /* Vertically center the content */
+  justify-content: center; /* Center content horizontally */
+  z-index: 1000; /* Ensure it stays above other content */
+}
+
+.nav {
+  display: flex; /* Flexbox to align nav items */
+  justify-content: center; /* Center the nav items horizontally */
+  width: 100%; /* Make the nav span the full width */
 }
 
 .nav-links {
-  width: 100%;
-  list-style: none;
-  display: flex;
-  justify-content: space-around;
-  gap: 20px;
-  padding: 0;
-  margin: 0;
+  display: flex; /* Flexbox to align links */
+  gap: 30px; /* Space between the links */
+  list-style: none; /* Remove list bullets */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
 }
 
 .nav-links li {
-  margin: 0px 20px;
+  flex: none; /* Prevent flex items from resizing */
 }
 
 .nav-links a {
-  color: white;
-  text-decoration: none;
+  color: white; /* Color of the links */
+  text-decoration: none; /* Remove underline */
+  font-size: 18px; /* Font size of the links */
+  padding: 10px 15px; /* Padding inside the links */
+  display: block; /* Ensure the padding is clickable */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
 }
 
 .nav-links a:hover {
-  border-bottom: 2px solid white;
+  background-color: #555; /* Background color on hover */
 }
 
-.nav-links .active {
-  font-weight: bold;
-  border-bottom: 2px solid white;
+.nav-links a.active {
+  border-bottom: 2px solid white; /* Highlight the active link */
 }

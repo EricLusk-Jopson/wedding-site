@@ -16,10 +16,10 @@ import img16 from "../../assets/Images/photo-16.jpg";
 import img17 from "../../assets/Images/photo-17.jpg";
 import img18 from "../../assets/Images/photo-18.jpg";
 import img20 from "../../assets/Images/photo-20.jpg";
-import styled from "styled-components";
 import shuffleArray from "../../utils/shuffleArray";
 import { useRef, useState } from "react";
 import ImagePreviewModal from "../../components/modals/ImagePreview/ImagePreview";
+import styles from "./Gallery.module.css";
 
 const images = [
   img1,
@@ -42,32 +42,6 @@ const images = [
   img20,
 ];
 
-const GalleryContainer = styled.div`
-  margin: 20px 10%;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(8, 1fr);
-  gap: 10px;
-  grid-auto-rows: 1fr;
-  grid-auto-columns: 1fr;
-`;
-
-const ImageWrapper = styled.div`
-  position: relative;
-  overflow: hidden;
-  grid-column: span 2;
-  grid-row: span 3;
-  transition: transform 0.3s, box-shadow 0.3s;
-  &:hover {
-    transform: scale(1.02);
-    -webkit-filter: sepia(5%);
-  }
-`;
-
-const Image = styled.img`
-  width: 100%;
-  object-fit: cover;
-`;
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const imagesRef = useRef(shuffleArray(images));
@@ -82,13 +56,22 @@ const Gallery = () => {
 
   return (
     <main style={{ backgroundColor: "#efefef" }}>
-      <GalleryContainer>
+      <section className={styles.hero}>
+        <img src={img9} />
+        <h1 className={styles.centeredTitle}>Gallery</h1>
+      </section>
+
+      <section className={styles.galleryContainer}>
         {imagesRef.current.map((image) => (
-          <ImageWrapper>
-            <Image src={image} onClick={() => openModal(image)} />
-          </ImageWrapper>
+          <div className={styles.imageWrapper}>
+            <img
+              className={styles.image}
+              src={image}
+              onClick={() => openModal(image)}
+            />
+          </div>
         ))}
-      </GalleryContainer>
+      </section>
       {selectedImage && (
         <ImagePreviewModal
           show={true}
