@@ -3,10 +3,16 @@ import venue from "../../assets/Images/pax1.jpeg";
 import coupe from "../../assets/Images/pax2.webp";
 import RsvpForm from "../../components/RsvpForm/RsvpForm";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 // import { useState } from "react";
 
 const RSVP: React.FC = () => {
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
   const { token } = useParams();
+
+  const handleHeroImageLoad = () => {
+    setHeroImageLoaded(true);
+  };
 
   const scrollToSection = () => {
     const section = document.getElementById("rsvp-section");
@@ -51,49 +57,57 @@ const RSVP: React.FC = () => {
     <main className={styles.rsvpMain}>
       <section className={styles.heroContainer}>
         <div className={styles.imageContainer}>
-          <img src={venue} alt="Description" />
-          <button className={styles.centeredLink} onClick={scrollToSection}>
-            <h1 className={styles.contentTitle}>RSVP</h1>
-          </button>
+          <img src={venue} alt="Description" onLoad={handleHeroImageLoad} />
+          {heroImageLoaded && (
+            <button className={styles.centeredLink} onClick={scrollToSection}>
+              <h1 className={styles.contentTitle}>RSVP</h1>
+            </button>
+          )}
         </div>
-        <div className={styles.contentContainer}>
-          <section className={styles.titleContainer}>
-            <h2>Celebrate With Us</h2>
-            <h3>
-              We invite you to celebrate our elopement at an intimate venue on
-              Commercial Drive.
-            </h3>
-            <h3>
-              Join us on{" "}
-              <strong>
-                Saturday, September 28<sup>th</sup>
-              </strong>{" "}
-              for a night of food and drink amidst good friends and family.
-            </h3>
-          </section>
-        </div>
+        {heroImageLoaded && (
+          <div className={styles.contentContainer}>
+            <section className={styles.titleContainer}>
+              <h2>Celebrate With Us</h2>
+              <h3>
+                We invite you to celebrate our elopement at an intimate venue on
+                Commercial Drive.
+              </h3>
+              <h3>
+                Join us on{" "}
+                <strong>
+                  Saturday, September 28<sup>th</sup>
+                </strong>{" "}
+                for a night of food and drink amidst good friends and family.
+              </h3>
+            </section>
+          </div>
+        )}
       </section>
-      <section>
-        <section className={styles.detailsContainer}>
-          <section className={styles.details}>
-            <h2>Venue</h2>
-            <h4>Pax Romana</h4>
-            <p>1670 Commercial Dr</p>
-            <p>East Vancouver</p>
+      {heroImageLoaded && (
+        <>
+          <section>
+            <section className={styles.detailsContainer}>
+              <section className={styles.details}>
+                <h2>Venue</h2>
+                <h4>Pax Romana</h4>
+                <p>1670 Commercial Dr</p>
+                <p>East Vancouver</p>
+              </section>
+              <section className={styles.details}>
+                <h2>Event</h2>
+                <h4>Saturday, September 28th</h4>
+                <p>5:00pm - 11:00pm</p>
+                <p>Cocktail Attire</p>
+              </section>
+            </section>
           </section>
-          <section className={styles.details}>
-            <h2>Event</h2>
-            <h4>Saturday, September 28th</h4>
-            <p>5:00pm - 11:00pm</p>
-            <p>Cocktail Attire</p>
+          <section id="rsvp-section" className={styles.villainContainer}>
+            <img src={coupe}></img>
+            {getMessageFromToken()}
+            {token !== "thank-you" && token !== "sorry" && <RsvpForm />}
           </section>
-        </section>
-      </section>
-      <section id="rsvp-section" className={styles.villainContainer}>
-        <img src={coupe}></img>
-        {getMessageFromToken()}
-        {token !== "thank-you" && token !== "sorry" && <RsvpForm />}
-      </section>
+        </>
+      )}
     </main>
   );
 };
