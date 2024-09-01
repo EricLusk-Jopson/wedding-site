@@ -96,10 +96,43 @@ const Admin: React.FC = () => {
       >
         <div style={{ flexGrow: 1 }}>
           <h2>Guest List</h2>
+          <br />
           <ul>
-            <li>Louise and Eric</li>
-            <li>Susan and Will</li>
-            <li>Vita and Ian</li>
+            <h4>Immediate Family - 10</h4>
+            <li>Louise and Eric Lusk-Jopson</li>
+            <li>Susan Lusk and Will Jopson</li>
+            <li>Vita and Ian Macdougall</li>
+            <li>Cole Macdougall</li>
+            <li>Elise Macdougall</li>
+            <li>Miriam Macdougall</li>
+            <li>Marion Jopson</li>
+            <br />
+            <h4>Guests of Honour - 5</h4>
+            <li>Sabrina Macdougall and Clayton Mobbs</li>
+            <li>Ella Worrall and Cam ??</li>
+            <li>Bill Xu</li>
+            <br />
+            <h4>Friends - </h4>
+            <li>Conor Morrison and Gustavo</li>
+            <li>Noel and Taylor</li>
+            <li>Dawson and Taylor</li>
+            <li>Akshay and Anant</li>
+            <li>Holly</li>
+            <li>Eric Turko</li>
+            <li>Jeff</li>
+            <li>Anna + 1</li>
+            <li>Denver + 1</li>
+            <li>Michael and Katie</li>
+            <li>Greg</li>
+            <li>Colm O'Donnell and Gf</li>
+            <br />
+            <h4>Family - 14</h4>
+            <li>Mark, Amy and Davis Jeffrey</li>
+            <li>Dunc, Lanie, Paisley, Mason</li>
+            <li>Jessica and Partner</li>
+            <li>Marg</li>
+            <li>Suzanne and Paul</li>
+            <li>Carmen and Alan</li>
           </ul>
         </div>
         <form onSubmit={handleSubmit} style={{ flexGrow: 2 }}>

@@ -44,6 +44,7 @@ const images = [
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
   const imagesRef = useRef(shuffleArray(images));
 
   const openModal = (imageSrc: string) => {
@@ -54,24 +55,31 @@ const Gallery = () => {
     setSelectedImage(null);
   };
 
+  const handleHeroImageLoad = () => {
+    setHeroImageLoaded(true);
+  };
+
   return (
     <main style={{ backgroundColor: "#efefef" }}>
       <section className={styles.hero}>
-        <img src={img9} />
-        <h1 className={styles.centeredTitle}>Gallery</h1>
+        <img src={img9} onLoad={handleHeroImageLoad} />
+        {heroImageLoaded && <h1 className={styles.centeredTitle}>Gallery</h1>}
       </section>
 
-      <section className={styles.galleryContainer}>
-        {imagesRef.current.map((image) => (
-          <div className={styles.imageWrapper}>
-            <img
-              className={styles.image}
-              src={image}
-              onClick={() => openModal(image)}
-            />
-          </div>
-        ))}
-      </section>
+      {heroImageLoaded && (
+        <section className={styles.galleryContainer}>
+          {imagesRef.current.map((image, index) => (
+            <div className={styles.imageWrapper} key={index}>
+              <img
+                className={styles.image}
+                src={image}
+                onClick={() => openModal(image)}
+              />
+            </div>
+          ))}
+        </section>
+      )}
+
       {selectedImage && (
         <ImagePreviewModal
           show={true}
