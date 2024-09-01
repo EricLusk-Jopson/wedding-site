@@ -38,12 +38,13 @@
   align-items: center;
   gap: 3rem;
   padding: 2rem 1rem;
+  width: 100vw;
   max-width: 800px;
   margin: 0 auto;
 }
 
 .textContentContainer * {
-  margin: 1rem 0;
+  padding: 0.5rem 0.5rem;
 }
 
 .textContentContainer p {
