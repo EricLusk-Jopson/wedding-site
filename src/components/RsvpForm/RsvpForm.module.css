@@ -32,12 +32,6 @@ textarea {
   font-weight: 600;
 }
 
-input:disabled,
-textarea:disabled {
-  background-color: #000;
-  color: #e41111;
-}
-
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }

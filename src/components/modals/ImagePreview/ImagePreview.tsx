@@ -23,14 +23,19 @@ const ImagePreviewModalBackground = styled.div<{ show: boolean }>`
 const ImagePreviewModalContent = styled.div`
   position: relative;
   width: fit-content;
-  height: 95vh;
-  margin: 2.5vh auto;
+  height: 100vh;
+  padding: 20px 0px;
+  max-width: 90vw;
+  margin: 0 auto; /* Center horizontally */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 `;
 
 const ImagePreviewModalImage = styled.img`
-  position: relative;
   max-height: 100%;
-  margin: auto;
+  max-width: 90vw;
+  height: auto;
 `;
 
 const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({

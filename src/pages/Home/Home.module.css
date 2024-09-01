@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+}
+
+.hero {
+  position: relative;
+  max-height: calc(100vh - 35px);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end; /* Align the image to the bottom of the container */
+}
+
+.hero img {
+  width: 100vw;
+  height: auto;
+  object-fit: cover; /* Ensure the image covers the width of the container */
+  object-position: center bottom; /* Align the image to the bottom */
+}
+
+.hero .title {
+  text-align: left;
+  justify-self: center;
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  text-decoration: none;
+  color: #f1f1f1;
+  border: #f1f1f1 solid 3px;
+  padding: 1rem 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.hero .subtitle {
+  text-align: left;
+  justify-self: center;
+  position: absolute;
+  bottom: 5%;
+  left: 0%;
+  text-decoration: none;
+  color: #f1f1f1;
+  padding: 1rem 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+@media (min-width: 1000px) {
+  .hero .title {
+    bottom: 10%;
+    left: 0%;
+    top: unset;
+    right: unset;
+    font-size: 5rem;
+    border: none;
+    background-color: unset;
+  }
+}
