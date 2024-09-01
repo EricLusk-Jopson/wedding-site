@@ -28,11 +28,15 @@ const Admin: React.FC = () => {
     const token = crypto.randomUUID(); // Generate a unique token
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { error } = await supabase
-      .from("parties")
-      .insert([
-        { name: partyName, size: partySize, email: contactEmail, token },
-      ]);
+    const { error } = await supabase.from("parties").insert([
+      {
+        name: partyName,
+        max: partySize,
+        size: partySize,
+        email: contactEmail,
+        token,
+      },
+    ]);
 
     if (error) {
       console.error("Error creating party:", error);
@@ -71,35 +75,160 @@ const Admin: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Manage Parties</h2>
-      <ul>
-        {parties.map((party) => (
-          <li key={party.id}>{party.name}</li>
-        ))}
-      </ul>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Party Name"
-          value={partyName}
-          onChange={(e) => setPartyName(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Party Size"
-          value={partySize}
-          onChange={(e) => setPartySize(Number(e.target.value))}
-        />
-        <input
-          type="email"
-          placeholder="Contact Email"
-          value={contactEmail}
-          onChange={(e) => setContactEmail(e.target.value)}
-        />
-        <button type="submit">Add Party</button>
-      </form>
-    </div>
+    <main
+      style={{
+        margin: "4rem 2rem",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        alignItems: "center",
+      }}
+    >
+      <section
+        style={{
+          width: "100vw",
+          padding: "4rem 2rem",
+          display: "flex",
+          gap: "1rem",
+          alignItems: "start",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <div style={{ flexGrow: 1 }}>
+          <h2>Guest List</h2>
+          <ul>
+            <li>Louise and Eric</li>
+            <li>Susan and Will</li>
+            <li>Vita and Ian</li>
+          </ul>
+        </div>
+        <form onSubmit={handleSubmit} style={{ flexGrow: 2 }}>
+          <input
+            type="text"
+            placeholder="Party Name"
+            value={partyName}
+            onChange={(e) => setPartyName(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Party Size"
+            value={partySize}
+            onChange={(e) => setPartySize(Number(e.target.value))}
+          />
+          <input
+            type="email"
+            placeholder="Contact Email"
+            value={contactEmail}
+            onChange={(e) => setContactEmail(e.target.value)}
+          />
+          <button type="submit">Add Party</button>
+        </form>
+        <div style={{ flexGrow: 1 }}>
+          <h2>Invited Parties</h2>
+          <ul>
+            {parties.map((party) => (
+              <li key={party.id}>
+                {party.name} -{" "}
+                {party.confirmed
+                  ? `confirmed for ${party.size} guest${
+                      party.size > 1 ? "s" : ""
+                    }`
+                  : party.confirmed == null
+                  ? "has not responded yet"
+                  : "declined"}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section
+        style={{
+          width: "100vw",
+          padding: "4rem 2rem",
+          display: "flex",
+          gap: "1rem",
+          alignItems: "start",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <div>
+          <h2>
+            {parties
+              .filter((party) => party.confirmed === true)
+              .reduce((acc, curr) => (acc += curr.size), 0)}{" "}
+            Confirmed
+          </h2>
+          <ul>
+            {parties
+              .filter((party) => party.confirmed === true)
+              .map((party) => (
+                <li key={party.id}>
+                  {party.name} -{" "}
+                  {party.confirmed
+                    ? `confirmed for ${party.size} guest${
+                        party.size > 1 ? "s" : ""
+                      }`
+                    : party.confirmed == null
+                    ? "has not responded yet"
+                    : "declined"}
+                </li>
+              ))}
+          </ul>
+        </div>
+        <div>
+          <h2>
+            {parties
+              .filter((party) => party.confirmed === false)
+              .reduce((acc, curr) => (acc += curr.size), 0)}{" "}
+            Declined:{" "}
+          </h2>
+          <ul>
+            {parties
+              .filter((party) => party.confirmed === false)
+              .map((party) => (
+                <li key={party.id}>
+                  {party.name} -{" "}
+                  {party.confirmed
+                    ? `confirmed for ${party.size} guest${
+                        party.size > 1 ? "s" : ""
+                      }`
+                    : party.confirmed == null
+                    ? "has not responded yet"
+                    : "declined"}
+                </li>
+              ))}
+          </ul>
+        </div>
+        <div>
+          <h2>
+            {parties
+              .filter((party) => party.confirmed === null)
+              .reduce((acc, curr) => (acc += curr.size), 0)}{" "}
+            No Response
+          </h2>
+          <ul>
+            {parties
+              .filter(
+                (party) =>
+                  party.confirmed === undefined || party.confirmed === null
+              )
+              .map((party) => (
+                <li key={party.id}>
+                  {party.name} -{" "}
+                  {party.confirmed
+                    ? `confirmed for ${party.size} guest${
+                        party.size > 1 ? "s" : ""
+                      }`
+                    : party.confirmed == null
+                    ? "has not responded yet"
+                    : "declined"}
+                </li>
+              ))}
+          </ul>
+        </div>
+      </section>
+    </main>
   );
 };
 
