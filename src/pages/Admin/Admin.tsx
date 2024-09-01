@@ -112,14 +112,16 @@ const Admin: React.FC = () => {
             <li>Ella Worrall and Cam ??</li>
             <li>Bill Xu</li>
             <br />
-            <h4>Friends</h4>
+            <h4>Friends - </h4>
             <li>Conor Morrison and Gustavo</li>
             <li>Noel and Taylor</li>
             <li>Dawson and Taylor</li>
             <li>Akshay and Anant</li>
+            <li>Holly</li>
+            <li>Eric Turko</li>
             <li>Jeff</li>
             <li>Anna + 1</li>
-            <li>Denver = 1</li>
+            <li>Denver + 1</li>
             <li>Michael and Katie</li>
             <li>Greg</li>
             <li>Colm O'Donnell and Gf</li>
