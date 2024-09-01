@@ -31,7 +31,13 @@ const Admin: React.FC = () => {
     const { error } = await supabase
       .from("parties")
       .insert([
-        { name: partyName, size: partySize, email: contactEmail, token },
+        {
+          name: partyName,
+          max: partySize,
+          size: partySize,
+          email: contactEmail,
+          token,
+        },
       ]);
 
     if (error) {
