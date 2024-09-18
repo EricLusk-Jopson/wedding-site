@@ -46,7 +46,7 @@ const RSVP: React.FC = () => {
         return (
           <div className={styles.message}>
             <h2 className={styles.title}>
-              Please RSVP before September 14<sup>th</sup>
+              Please RSVP before September 21<sup>st</sup>
             </h2>
           </div>
         );
