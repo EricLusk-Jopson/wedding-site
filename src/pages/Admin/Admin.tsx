@@ -4,8 +4,7 @@ import { Party } from "../../types/Party";
 // import { supabase } from "../../supabase/supabaseClient";
 
 const Admin: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [parties, setParties] = useState<Party[]>([]);
+  const [parties] = useState<Party[]>([]);
   const [partyName, setPartyName] = useState<string>("");
   const [partySize, setPartySize] = useState<number>(0);
   const [contactEmail, setContactEmail] = useState<string>("");
