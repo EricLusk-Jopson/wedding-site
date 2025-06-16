@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { supabase } from "../../supabase/supabaseClient";
+// import { supabase } from "../../supabase/supabaseClient";
 import { useNavigate, useParams } from "react-router-dom";
 import { Party } from "../../types/Party";
 import styles from "./RsvpForm.module.css";
@@ -22,18 +22,18 @@ const RsvpForm = () => {
   }, [token]);
 
   const fetchParty = async () => {
-    const { data, error } = await supabase
-      .from("parties")
-      .select("*")
-      .eq("token", token)
-      .single();
-    if (error || !data) {
-      setError(
-        "We could not verify your RSVP link. Please check your inbox for an RSVP link."
-      );
-    } else {
-      setParty(data as Party);
-    }
+    // const { data, error } = await supabase
+    //   .from("parties")
+    //   .select("*")
+    //   .eq("token", token)
+    //   .single();
+    // if (error || !data) {
+    //   setError(
+    //     "We could not verify your RSVP link. Please check your inbox for an RSVP link."
+    //   );
+    // } else {
+    //   setParty(data as Party);
+    // }
     setLoading(false);
   };
 
@@ -50,26 +50,33 @@ const RsvpForm = () => {
     e.preventDefault();
     if (!party) return;
 
-    const { error } = await supabase
-      .from("parties")
-      .update({
-        name: party.name,
-        size: party.size,
-        notes: party.notes,
-        confirmed: party.confirmed,
-      })
-      .eq("token", token);
-
-    if (error) {
-      console.error("Error updating party:", error);
+    // Redirect to thank you page
+    if (party.confirmed) {
+      navigate("/rsvp/thank-you");
     } else {
-      // Redirect to thank you page
-      if (party.confirmed) {
-        navigate("/rsvp/thank-you");
-      } else {
-        navigate("/rsvp/sorry");
-      }
+      navigate("/rsvp/sorry");
     }
+
+    // const { error } = await supabase
+    //   .from("parties")
+    //   .update({
+    //     name: party.name,
+    //     size: party.size,
+    //     notes: party.notes,
+    //     confirmed: party.confirmed,
+    //   })
+    //   .eq("token", token);
+
+    // if (error) {
+    //   console.error("Error updating party:", error);
+    // } else {
+    //   // Redirect to thank you page
+    //   if (party.confirmed) {
+    //     navigate("/rsvp/thank-you");
+    //   } else {
+    //     navigate("/rsvp/sorry");
+    //   }
+    // }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
